@@ -1,0 +1,414 @@
+{
+ "module": "keras",
+ "class_name": "Sequential",
+ "config": {
+  "name": "sequential",
+  "trainable": true,
+  "dtype": {
+   "module": "keras",
+   "class_name": "DTypePolicy",
+   "config": {
+    "name": "float32"
+   },
+   "registered_name": null
+  },
+  "layers": [
+   {
+    "module": "keras.layers",
+    "class_name": "InputLayer",
+    "config": {
+     "batch_shape": [
+      null,
+      224,
+      224,
+      3
+     ],
+     "dtype": "float32",
+     "sparse": false,
+     "name": "input_layer_1"
+    },
+    "registered_name": null
+   },
+   {
+    "module": "keras_cv.src.models.backbones.mobilenet_v3.mobilenet_v3_backbone",
+    "class_name": "MobileNetV3Backbone",
+    "config": {
+     "name": "mobile_net_v3_small_backbone",
+     "trainable": false,
+     "stackwise_expansion": [
+      1,
+      4.5,
+      3.6666666666666665,
+      4,
+      6,
+      6,
+      3,
+      3,
+      6,
+      6,
+      6
+     ],
+     "stackwise_filters": [
+      16,
+      24,
+      24,
+      40,
+      40,
+      40,
+      48,
+      48,
+      96,
+      96,
+      96
+     ],
+     "stackwise_kernel_size": [
+      3,
+      3,
+      3,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+     ],
+     "stackwise_stride": [
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1
+     ],
+     "stackwise_se_ratio": [
+      0.25,
+      null,
+      null,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25
+     ],
+     "stackwise_activation": [
+      "relu",
+      "relu",
+      "relu",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish",
+      "hard_swish"
+     ],
+     "include_rescaling": true,
+     "input_shape": [
+      224,
+      224,
+      3
+     ],
+     "input_tensor": null,
+     "alpha": 1.0
+    },
+    "registered_name": "keras_cv>MobileNetV3Backbone",
+    "build_config": {
+     "input_shape": null
+    }
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "AveragePooling2D",
+    "config": {
+     "name": "average_pooling2d",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "pool_size": [
+      5,
+      5
+     ],
+     "padding": "valid",
+     "strides": [
+      5,
+      5
+     ],
+     "data_format": "channels_last"
+    },
+    "registered_name": null
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "Flatten",
+    "config": {
+     "name": "flatten",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "data_format": "channels_last"
+    },
+    "registered_name": null,
+    "build_config": {
+     "input_shape": [
+      null,
+      1,
+      1,
+      576
+     ]
+    }
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "Dense",
+    "config": {
+     "name": "dense",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "units": 128,
+     "activation": "relu",
+     "use_bias": true,
+     "kernel_initializer": {
+      "module": "keras.initializers",
+      "class_name": "GlorotUniform",
+      "config": {
+       "seed": null
+      },
+      "registered_name": null
+     },
+     "bias_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Zeros",
+      "config": {},
+      "registered_name": null
+     },
+     "kernel_regularizer": {
+      "module": "keras.regularizers",
+      "class_name": "L2",
+      "config": {
+       "l2": 0.01
+      },
+      "registered_name": null
+     },
+     "bias_regularizer": null,
+     "kernel_constraint": null,
+     "bias_constraint": null
+    },
+    "registered_name": null,
+    "build_config": {
+     "input_shape": [
+      null,
+      576
+     ]
+    }
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "Dropout",
+    "config": {
+     "name": "dropout",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "rate": 0.5,
+     "seed": null,
+     "noise_shape": null
+    },
+    "registered_name": null
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "BatchNormalization",
+    "config": {
+     "name": "batch_normalization",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "axis": -1,
+     "momentum": 0.99,
+     "epsilon": 0.001,
+     "center": true,
+     "scale": true,
+     "beta_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Zeros",
+      "config": {},
+      "registered_name": null
+     },
+     "gamma_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Ones",
+      "config": {},
+      "registered_name": null
+     },
+     "moving_mean_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Zeros",
+      "config": {},
+      "registered_name": null
+     },
+     "moving_variance_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Ones",
+      "config": {},
+      "registered_name": null
+     },
+     "beta_regularizer": null,
+     "gamma_regularizer": null,
+     "beta_constraint": null,
+     "gamma_constraint": null,
+     "synchronized": false
+    },
+    "registered_name": null,
+    "build_config": {
+     "input_shape": [
+      null,
+      128
+     ]
+    }
+   },
+   {
+    "module": "keras.layers",
+    "class_name": "Dense",
+    "config": {
+     "name": "dense_1",
+     "trainable": true,
+     "dtype": {
+      "module": "keras",
+      "class_name": "DTypePolicy",
+      "config": {
+       "name": "float32"
+      },
+      "registered_name": null
+     },
+     "units": 1,
+     "activation": "sigmoid",
+     "use_bias": true,
+     "kernel_initializer": {
+      "module": "keras.initializers",
+      "class_name": "GlorotUniform",
+      "config": {
+       "seed": null
+      },
+      "registered_name": null
+     },
+     "bias_initializer": {
+      "module": "keras.initializers",
+      "class_name": "Zeros",
+      "config": {},
+      "registered_name": null
+     },
+     "kernel_regularizer": null,
+     "bias_regularizer": null,
+     "kernel_constraint": null,
+     "bias_constraint": null
+    },
+    "registered_name": null,
+    "build_config": {
+     "input_shape": [
+      null,
+      128
+     ]
+    }
+   }
+  ],
+  "build_input_shape": [
+   null,
+   224,
+   224,
+   3
+  ]
+ },
+ "registered_name": null,
+ "build_config": {
+  "input_shape": [
+   null,
+   224,
+   224,
+   3
+  ]
+ },
+ "compile_config": {
+  "optimizer": {
+   "module": "keras.optimizers",
+   "class_name": "Adam",
+   "config": {
+    "name": "adam",
+    "learning_rate": 9.999999747378752e-05,
+    "weight_decay": null,
+    "clipnorm": null,
+    "global_clipnorm": null,
+    "clipvalue": null,
+    "use_ema": false,
+    "ema_momentum": 0.99,
+    "ema_overwrite_frequency": null,
+    "loss_scale_factor": null,
+    "gradient_accumulation_steps": null,
+    "beta_1": 0.9,
+    "beta_2": 0.999,
+    "epsilon": 1e-07,
+    "amsgrad": false
+   },
+   "registered_name": null
+  },
+  "loss": "binary_crossentropy",
+  "loss_weights": null,
+  "metrics": [
+   {
+    "module": "keras.metrics",
+    "class_name": "BinaryAccuracy",
+    "config": {
+     "name": "binary_accuracy",
+     "dtype": "float32",
+     "threshold": 0.5
+    },
+    "registered_name": null
+   }
+  ],
+  "weighted_metrics": null,
+  "run_eagerly": false,
+  "steps_per_execution": 1,
+  "jit_compile": true
+ }
+}
